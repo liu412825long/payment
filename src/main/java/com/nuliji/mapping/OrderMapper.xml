@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="com.nuliji.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.nuliji.proj.Order">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="direction" jdbcType="SMALLINT" property="direction" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="source" jdbcType="SMALLINT" property="source" />
+    <result column="pay_id" jdbcType="VARCHAR" property="payId" />
+    <result column="pay_channel" jdbcType="VARCHAR" property="payChannel" />
+    <result column="create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="update_time" jdbcType="INTEGER" property="updateTime" />
+    <result column="order_status" jdbcType="SMALLINT" property="orderStatus" />
+    <result column="pay_status" jdbcType="SMALLINT" property="payStatus" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nuliji.proj.Order">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    `id`, `direction`, `user_id`, `money`, `source`, `pay_id`, `pay_channel`, `create_time`, `update_time`, `order_status`,
+    `pay_status`
+  </sql>
+  <sql id="Blob_Column_List">
+    `description`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from `order`
+    where `id` = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from `order`
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nuliji.proj.Order">
+    insert into `order` (`id`, `direction`, `user_id`,
+      `money`, `source`, `pay_id`,
+      `pay_channel`, `create_time`, `update_time`,
+      `order_status`, `pay_status`, `description`
+      )
+    values (#{id,jdbcType=VARCHAR}, #{direction,jdbcType=SMALLINT}, #{userId,jdbcType=VARCHAR},
+      #{money,jdbcType=DECIMAL}, #{source,jdbcType=SMALLINT}, #{payId,jdbcType=VARCHAR}, 
+      #{payChannel,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER}, #{updateTime,jdbcType=INTEGER}, 
+      #{orderStatus,jdbcType=SMALLINT}, #{payStatus,jdbcType=SMALLINT}, #{description,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nuliji.proj.Order">
+    insert into `order`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        `id`,
+      </if>
+      <if test="direction != null">
+        `direction`,
+      </if>
+      <if test="userId != null">
+        `user_id`,
+      </if>
+      <if test="money != null">
+        `money`,
+      </if>
+      <if test="source != null">
+        `source`,
+      </if>
+      <if test="payId != null">
+        `pay_id`,
+      </if>
+      <if test="payChannel != null">
+        `pay_channel`,
+      </if>
+      <if test="createTime != null">
+        `create_time`,
+      </if>
+      <if test="updateTime != null">
+        `update_time`,
+      </if>
+      <if test="orderStatus != null">
+        `order_status`,
+      </if>
+      <if test="payStatus != null">
+        `pay_status`,
+      </if>
+      <if test="description != null">
+        `description`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="direction != null">
+        #{direction,jdbcType=SMALLINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=SMALLINT},
+      </if>
+      <if test="payId != null">
+        #{payId,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannel != null">
+        #{payChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nuliji.proj.Order">
+    update `order`
+    <set>
+      <if test="direction != null">
+        `direction` = #{direction,jdbcType=SMALLINT},
+      </if>
+      <if test="userId != null">
+        `user_id` = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        `money` = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="source != null">
+        `source` = #{source,jdbcType=SMALLINT},
+      </if>
+      <if test="payId != null">
+        `pay_id` = #{payId,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannel != null">
+        `pay_channel` = #{payChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        `create_time` = #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        `update_time` = #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null">
+        `order_status` = #{orderStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="payStatus != null">
+        `pay_status` = #{payStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="description != null">
+        `description` = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where `id` = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nuliji.proj.Order">
+    update `order`
+    set `direction` = #{direction,jdbcType=SMALLINT},
+      `user_id` = #{userId,jdbcType=VARCHAR},
+      `money` = #{money,jdbcType=DECIMAL},
+      `source` = #{source,jdbcType=SMALLINT},
+      `pay_id` = #{payId,jdbcType=VARCHAR},
+      `pay_channel` = #{payChannel,jdbcType=VARCHAR},
+      `create_time` = #{createTime,jdbcType=INTEGER},
+      `update_time` = #{updateTime,jdbcType=INTEGER},
+      `order_status` = #{orderStatus,jdbcType=SMALLINT},
+      `pay_status` = #{payStatus,jdbcType=SMALLINT},
+      `description` = #{description,jdbcType=LONGVARCHAR}
+    where `id` = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nuliji.proj.Order">
+    update `order`
+    set `direction` = #{direction,jdbcType=SMALLINT},
+      `user_id` = #{userId,jdbcType=VARCHAR},
+      `money` = #{money,jdbcType=DECIMAL},
+      `source` = #{source,jdbcType=SMALLINT},
+      `pay_id` = #{payId,jdbcType=VARCHAR},
+      `pay_channel` = #{payChannel,jdbcType=VARCHAR},
+      `create_time` = #{createTime,jdbcType=INTEGER},
+      `update_time` = #{updateTime,jdbcType=INTEGER},
+      `order_status` = #{orderStatus,jdbcType=SMALLINT},
+      `pay_status` = #{payStatus,jdbcType=SMALLINT}
+    where `id` = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectList"  resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from `order`
+    where `user_id` = #{param1,jdbcType=VARCHAR} limit #{param2,jdbcType=INTEGER}, #{param3,jdbcType=INTEGER}
+  </select>
+</mapper>
