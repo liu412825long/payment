@@ -2,7 +2,7 @@
 
 # Package Files #
 *.jar
-!libs/
+!libs/*
 *.war
 *.ear
 *.iml
