@@ -168,11 +168,16 @@ public class TradeService {
      * @throws ParameterException
      */
     public String preprocess(PayRequestData payRequest) throws ParameterException {
-        if(Objects.equals(payRequest.channel, "")) throw new ParameterException(103, "支付渠道为空");
+        if(Objects.equals(payRequest.channel, ""))
+            throw new ParameterException(103, "支付渠道为空");
         String source = getSource(payRequest.channel);
-        if(source.isEmpty()) throw new ParameterException(104, "支付渠道错误");
-        if(source == Source.ALIPAY) return Configure.alipayPid();
-        if(source == Source.WEIXIN) return Configure.weixinPid();
+        if(source.isEmpty())
+            throw new ParameterException(104, "支付渠道错误");
+        if(source == Source.ALIPAY)
+            return Configure.alipayPid();
+        if(source == Source.WEIXIN)
+            return Configure.weixinPid();
+
         throw new ParameterException(104, "支付渠道错误");
     }
 

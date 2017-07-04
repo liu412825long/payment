@@ -8,6 +8,7 @@
     <artifactId>pay-service</artifactId>
     <version>1.0</version>
     <name>Pay Service</name>
+    <packaging>war</packaging>
     <properties>
         <!-- base setting -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
